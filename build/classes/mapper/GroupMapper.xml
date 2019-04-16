@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.H.dao.GroupDao">
+	<select id="selectAllGroup" resultType="group">
+		select group_id , gname , detail 
+		from `group`
+	</select>
+	<select id="selectEmGroupByGroupId" resultType="emgroup">
+		select eg_id ,egname,group_id,detail
+		from em_group
+		where group_id = #{groupId}
+	</select>
+	<select id="selectByegId" resultType="emgroup">
+		select eg_id ,egname,group_id,detail
+		from em_group
+		where eg_id = #{egId}
+	</select>
+	<insert id="insertGroup">
+		insert into `group`( gname ) values (#{gname}) 
+	</insert>
+	
+	<insert id="insertEmGroup">
+		insert into em_group(egname,group_id) values(#{egname},#{groupId})
+	</insert>
+	<update id="updateGroup">
+		update `group` 
+		set gname = #{gname}
+		where group_id = #{groupId}
+	</update>
+	<update id="updateEmgroup">
+		update em_group
+		set egname = #{egname}
+		where eg_id = #{egId}
+	</update>
+	<delete id="deleteEmGroup">
+		delete from em_group
+		where group_id = #{groupId}
+	</delete>
+	<delete id="deleteGroup">
+		delete from `group`
+		where group_id = #{groupId}
+	</delete>
+	<select id="selectGroupById" resultType="group">
+		select group_id,gname,detail from `group`
+		where group_id=#{groupId}
+	</select>
+	<delete id="deleteEmGroupByegId">
+		delete from em_group
+		where eg_id = #{egId} 
+	</delete>
+</mapper>
